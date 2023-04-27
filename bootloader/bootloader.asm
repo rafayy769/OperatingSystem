@@ -2,7 +2,6 @@
 ; bootloader.asm
 ; A Simple Bootloader
 ;******************************************
-org 0x7c00
 bits 16
 start: jmp boot
 
@@ -18,9 +17,9 @@ boot:
     call    print_string            ; print message
 
     ; read the kernel from next sector
-    mov ax, 0x50
+    mov ax, 50h
     
-    ;; set the buffer
+    ; set the buffer
     mov es, ax
     xor bx, bx
 
@@ -30,18 +29,15 @@ boot:
     mov dh, 0 ; head number
     mov dl, 0 ; drive number
 
-    mov ah, 0x02 ; read sectors from disk
-    int 0x13 ; call the BIOS routine
-    jmp 0x50:0x0 ; jump and execute the sector!
+    mov ah, 0x02        ; read sectors from disk
+    int 0x13            ; call the BIOS routine
+    jmp [500h + 18h]    ; jump and execute the sector!
 
     hlt ; halt the CPU
 
 ; data segment
 HELLO_MSG:
-    db      "Hello, World!", 0
-
-GOODBYE_MSG:
-    db      "Goodbye, World!", 0
+    db      "Welcome to OS!", 0
 
  ; We have to be 512 bytes. Clear the rest of the bytes with
 times 510 - ($-$$) db 0
