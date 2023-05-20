@@ -13,7 +13,7 @@ $(OS_DIR)/%.o: %.c
 	gcc $(CFLAGS) -c $< -o $@
 
 $(OS): $(OS_OBJS)
-	ld -m elf_i386 -nmagic -T os.lds $(OS_OBJS) -o $@
+	ld -m elf_i386 -nmagic -T kernel.lds $(OS_OBJS) -o $@
 
 clean:
 	rm $(OS_OBJS)
