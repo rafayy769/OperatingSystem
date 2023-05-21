@@ -11,4 +11,4 @@ $(BUILD_DIR)/%.o: %.asm
 	objcopy -O binary $(BUILD_DIR)/bootloader.o.elf $@
 
 clean:
-	rm $(BUILD_DIR)/*
+	rm -f $(BUILD_DIR)/*
