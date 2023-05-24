@@ -10,6 +10,7 @@ OS_OBJS := $(patsubst %.c, $(OS_DIR)/%.o, $(OS_SRCS))
 all: $(OS)
 
 $(OS_DIR)/%.o: %.c
+	mkdir $(OS_DIR) -p
 	gcc $(CFLAGS) -c $< -o $@
 
 $(OS): $(OS_OBJS)
