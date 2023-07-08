@@ -19,15 +19,19 @@ print_string_loop:
     mov     al, [bx]
     cmp     al, 0
     jne     print_string_loop
-; print a new line and return
+; ends and returns
 print_string_end:
-    ; mov     al, 0x0a
-    ; call    print_char
-    popa   
+    popa
 
-    ; insert a new line
-    ; mov     ah, 0x0e
-    ; mov     al, 0x0a
-    ; int     0x10
+    ret
 
+print_newline:
+    pusha
+
+    mov al, 0x0a        ; newline char
+    call print_char
+    mov al, 0x0d        ; carriage return
+    call print_char
+
+    popa
     ret
